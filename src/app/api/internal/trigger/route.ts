@@ -48,22 +48,22 @@ export async function POST(req: NextRequest) {
                         <h2 style="color: #000;">Great news, Sneakerhead!</h2>
                         <p>The price for <strong>${alert.sneakerName}</strong> has dropped to <strong>$${currentPrice}</strong>.</p>
                         <p>This is at or below your target price of $${alert.targetPrice}. Time to cop!</p>
-                        ${alert.sneakerImage ?\`<img src="\${alert.sneakerImage}" style="max-width: 100%; border-radius: 8px; margin: 20px 0;" />\` : ''}
+                        ${alert.sneakerImage ? `<img src="${alert.sneakerImage}" style="max-width: 100%; border-radius: 8px; margin: 20px 0;" />` : ''}
                         <div style="text-align: center; margin-top: 30px;">
                             <a href="${process.env.NEXT_PUBLIC_APP_URL}/product/${alert.sneakerId}" style="background-color: #000; color: #fff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-weight: bold;">Check it out</a>
                         </div>
                     </div>
                     `
                 });
-            console.log(`[RESEND] Email sent to ${userEmail} for ${alert.sneakerName}`);
-        }
+                console.log(`[RESEND] Email sent to ${userEmail} for ${alert.sneakerName}`);
+            }
         } catch (emailErr: any) {
-        console.error('[RESEND] Failed to send email:', emailErr.message);
-    }
+            console.error('[RESEND] Failed to send email:', emailErr.message);
+        }
 
-    return NextResponse.json(updated);
-} catch (error) {
-    console.error('[INTERNAL_ALERTS_POST]', error);
-    return new NextResponse('Internal Error', { status: 500 });
-}
+        return NextResponse.json(updated);
+    } catch (error) {
+        console.error('[INTERNAL_ALERTS_POST]', error);
+        return new NextResponse('Internal Error', { status: 500 });
+    }
 }
