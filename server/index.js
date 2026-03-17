@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 4000;
 
 // --- Middleware ---
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
-    methods: ['GET'],
+    origin: process.env.CLIENT_URL ? [process.env.CLIENT_URL, 'http://localhost:3000'] : ['http://localhost:3000', 'https://solesearch-your-branch.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 }));
 app.use(express.json());
 
@@ -51,9 +51,13 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 require('./cron');
 
 
-app.listen(PORT, () => {
-    console.log(`🚀 SoleSearch API running on port ${PORT}`);
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`🚀 SoleSearch API running on port ${PORT}`);
+    });
+}
+
+module.exports = app;
 
 // Prevent crashes from sneaks-api internal errors
 process.on('uncaughtException', (err) => {

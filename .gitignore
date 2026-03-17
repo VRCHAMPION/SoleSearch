@@ -42,3 +42,13 @@ next-env.d.ts
 
 # clerk configuration (can include secrets)
 /.clerk/
+
+# Debug & Log files
+out.txt
+out_nextjs.txt
+prisma_err.txt
+prisma_gen_output.txt
+eslint-report.txt
+
+# Throwaway Test Scripts
+test-db.js
