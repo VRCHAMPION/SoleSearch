@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  image         String?
+  shoeSize      String?
+  portfolioItems PortfolioItem[]
+  watchlistItems WatchlistItem[]
+  priceAlerts   PriceAlert[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model PortfolioItem {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sneakerId     String
+  sneakerName   String
+  sneakerImage  String
+  sneakerBrand  String
+  colorway      String?
+  size          String
+  purchasePrice Float
+  purchaseDate  DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model WatchlistItem {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sneakerId     String
+  sneakerName   String
+  sneakerImage  String
+  sneakerBrand  String
+  colorway      String?
+  targetPrice   Float?
+  createdAt     DateTime @default(now())
+}
+
+model PriceAlert {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sneakerId     String
+  sneakerName   String
+  sneakerImage  String
+  targetPrice   Float
+  currentPrice  Float?
+  isTriggered   Boolean  @default(false)
+  triggeredAt   DateTime?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+}
+
+model PriceHistory {
+  id            String   @id @default(cuid())
+  sneakerId     String
+  price         Float
+  source        String
+  size          String?
+  recordedAt    DateTime @default(now())
+
+  @@index([sneakerId, recordedAt])
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://api.kicks.dev/schemas/ErrorModel.json",
+  "title": "Unprocessable Entity",
+  "status": 422,
+  "detail": "validation failed",
+  "errors": [
+    {
+      "message": "expected value to be one of \"release_date, rank\"",
+      "location": "query.sort",
+      "value": "weekly_orders"
+    }
+  ]
+}

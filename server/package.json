@@ -1,0 +1,20 @@
+{
+    "name": "solesearch-api",
+    "version": "1.0.0",
+    "description": "SoleSearch backend API server using KicksDB",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "node --watch index.js"
+    },
+    "dependencies": {
+        "@prisma/client": "^7.4.2",
+        "axios": "^1.7.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.0",
+        "express": "^4.18.2",
+        "express-rate-limit": "^7.1.4",
+        "node-cache": "^5.1.2",
+        "node-cron": "^4.2.1"
+    }
+}
