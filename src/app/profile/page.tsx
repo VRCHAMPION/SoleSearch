@@ -93,7 +93,7 @@ export default function ProfilePage() {
                             <h2 className="text-xl font-display font-semibold text-white">Size Preferences</h2>
                         </div>
                         <p className="text-gray-400 text-sm mb-6">
-                            Save your sneaker size and we'll automatically filter prices across all marketplaces to find deals that fit you.
+                            Save your sneaker size and we'll automatically filter prices across all marketplaces to find deals that fit you PERSONALISED.
                         </p>
 
                         <div className="space-y-4">
