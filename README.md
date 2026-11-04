@@ -17,24 +17,22 @@ SoleSearch is an advanced platform tailored for monitoring dynamic markets such 
 
 ## Tech Stack
 
-**Client:**
-- Next.js (App Router)
-- TypeScript
-- Tailwind CSS
-- Redux / Zustand (State Management)
+**Frontend (root `package.json`):**
+- Next.js 16 (App Router) with React 19 and TypeScript
+- Tailwind CSS 4
+- Zustand (state management)
+- Clerk (authentication)
+- Recharts (price charts), Framer Motion, Three.js via React Three Fiber
+- Resend (alert emails), Svix (Clerk webhook verification)
+- Vitest + Supertest (tests)
 
-**Server:**
-- Node.js
-- Express (Custom server for background tasks and external API proxying)
-- Next.js API Routes
+**Backend (`server/package.json`):**
+- Node.js + Express
+- node-cron (scheduled jobs), node-cache, express-rate-limit
+- Axios (KicksDB API client)
 
-**Database & Modeling:**
-- PostgreSQL
-- Prisma ORM
-- Zod (Schema validation)
-
-**Utilities:**
-- Axios
+**Database:**
+- PostgreSQL with Prisma ORM (`prisma/schema.prisma`: User, PortfolioItem, WatchlistItem, PriceAlert, PriceHistory)
 
 ## Folder Structure
 
@@ -89,7 +87,12 @@ solesearch/
 
    # In a second terminal window, start the Express backend
    cd server
-   node index.js
+   npm run dev
+   ```
+
+6. Run the tests:
+   ```bash
+   npm test
    ```
 
 ## Environment Variables
@@ -99,12 +102,14 @@ To run this project, you will need to add the following environment variables to
 **Root `.env` (Next.js):**
 ```env
 DATABASE_URL="postgresql://user:password@localhost:5432/solesearch"
+DIRECT_URL="postgresql://user:password@localhost:5432/solesearch"
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_publishable_key"
 CLERK_SECRET_KEY="your_clerk_secret_key"
 CLERK_WEBHOOK_SECRET="your_clerk_webhook_secret"
 RESEND_API_KEY="your_resend_api_key"
 CRON_SECRET="your_cron_secret"
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
+NEXT_PUBLIC_API_URL="http://localhost:4000/api"
 ```
 
 **Server `server/.env` (Express):**
@@ -144,4 +149,4 @@ Ensure that all code changes are linted and formatted properly before submitting
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
