@@ -10,7 +10,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@clerk/nextjs": "^6.39.0",
+    "@clerk/nextjs": "^6.39.8",
     "@headlessui/react": "^2.2.9",
     "@prisma/client": "^5.22.0",
     "@react-three/drei": "^10.7.7",
